@@ -1,0 +1,44 @@
+﻿@model List<Model.ViewModels.AdminUserViewModel>
+@{
+    ViewBag.Title = "Admin User Administration";
+}
+
+
+<div class="row site-navbar-bumper padding-bottom">
+    <div class="col-lg-8 page-header-wrapper">
+        <h1>@ViewBag.Title</h1>
+    </div>
+    <div class="col-lg-4 top-banner-button-wrapper">
+        @Html.ActionLink("Add New Admin", "EditOrCreateAdminUser", "AdminUserAdministration", new { username = "" }, new { @class = "btn btn-primary btn-lg btn-full-width" })
+    </div>
+</div>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="row padding-bottom">
+        <div class="col-md-12 bg-success">
+            <div class="text-center text-light message-text-large">@TempData["SuccessMessage"]</div>
+        </div>
+    </div>
+}
+
+<div class="row bg-dark admin-list-row admin-list-row-header">
+    <div class="col-md-8">
+        Username
+    </div>
+</div>
+
+@foreach (var entry in Model)
+{
+    <div class="row admin-list-row">
+        <div class="col-12 col-md-8">
+            <strong>@entry.UserName</strong>
+        </div>
+        <div class="col-6 col-md-2 btn-cell">
+            @Html.ActionLink("Veiw or edit", "EditOrCreateAdminUser", "AdminUserAdministration", new { email = @entry.UserName }, new { @class = "btn btn-primary btn-full-width" })
+        </div>
+        <div class="col-6 col-md-2 btn-cell">
+            <button class="btn btn-danger btn-full-width delete-movie" data-id="@entry.UserName" data-action="Delete" data-controller="AdminUserAdministration">Delete</button>
+        </div>
+    </div>
+}

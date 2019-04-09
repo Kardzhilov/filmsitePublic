@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Model.FAQModelDAL>
+@{
+    ViewBag.Title = "Index";
+}
+<h1 id="FAQTitle">FAQ</h1>
+
+<div class="accordion" id="accordionExample">
+    @foreach (var item in Model)
+    {
+        if (item.Answer != "")
+        {
+            <div class="card">
+                <div class="card-header" id="heading_@item.ID">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapse_@item.ID" +""+"" aria-expanded="false"
+                                aria-controls="collapse_@item.ID">
+                            @item.Question
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapse_@item.ID" class="collapse" aria-labelledby="heading_@item.ID" data-parent="#accordionExample">
+                    <div class="card-body">
+                        @item.Answer
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>
+
+<p class="card-space"> </p>
+<h2 id="FAQTitle2">User Submitted Questions</h2>
+
+@foreach (var item in Model)
+{
+    if (item.Answer == "")
+    {
+        <div class="card vote-card">
+            <div class="card-body vote-body">
+                Score: @item.Score
+                <div class="right-buttons">
+
+                    <button class="btn btn-primary" onclick="location.href='@Url.Action("UpVote","FAQ", new { id = item.ID })'" value="@item.ID" alt="Upvote" style="background-color:transparent;">👍</button>
+                    <button class="btn btn-primary" onclick="location.href='@Url.Action("DownVote","FAQ", new { id = item.ID })'" value="@item.ID" alt="Downvote" style="background-color:transparent;">👎</button>
+                </div>
+                <p class="card-text">@item.Question</p>
+            </div>
+        </div>
+    }
+}
+
+<p class="card-space"> </p>
+<div class="card submit-card">
+    <div class="card-body submit-body">
+        <a href="@Url.Action("Index", "FAQNew")" class="btn btn-primary" id="submit-button">Submit A Question</a>
+    </div>
+</div>
+
+

@@ -1,0 +1,39 @@
+﻿@model List<filmsite.Models.Movie>
+@using filmsite.Utilities;
+@{
+    ViewBag.Title = "All the best movies";
+    IList<string> genres = new List<string> { "Action", "Family", "Adventure", "Drama", "Comedy", "Crime", "Sci-Fi" };
+    var movies = ListUtilities.SuffleMovies(Model);
+    int maxNumbMoviesPerLine;
+}
+    @foreach (var genre in genres)
+    {
+        <h2 class="title-of-category">@genre</h2>
+        <div class="category-scrollbar-hider">
+            <div class="category-js-scroller-arrow category-js-scroller-left" role="button" data-direction-right="false"><div><</div></div>
+            <div class="category-js-scroller-arrow category-js-scroller-right" role="button" data-direction-right="true"><div>></div></div>
+            <div class="category-scroller-wrapper">
+                <div class="site-content-padding">
+                    <div class="category-scroller-content">
+                        @{
+                            maxNumbMoviesPerLine = 12;
+
+                            foreach (var Movie in movies)
+                            {
+                                if (Movie.Genre.StartsWith(genre) && maxNumbMoviesPerLine > 0)
+                                {
+                                    <a href="#" class="movie-poster-wrapper movie-info-link" data-movie-id="@Movie.ID" data-movie-genre="@genre.ToLower()" aria-label="@Movie.Title">
+                                        <img src="@Movie.Poster.Replace(".jpg", "._V1_SX360.jpg");" alt="@Movie.Title">
+                                    </a>
+                                    maxNumbMoviesPerLine--;
+                                }
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="category-scroller-bumper"></div>
+        <div id="@genre.ToLower()-information-toggle" class="movie-information-toggle"></div>
+    }
+

@@ -1,0 +1,65 @@
+﻿@model Model.ViewModels.AdminUserLoginViewModel
+@{
+    ViewBag.Title = "Administrate NOVA Video";
+}
+
+@if (ViewBag.LoggedIn != null && ViewBag.LoggedIn == true)
+{
+    <div class="row site-navbar-bumper">
+        <div class="col-md-12">
+            <h1>Dashboard</h1>
+        </div>
+    </div>
+    <hr />
+    <div class="row padding-top">
+        <div class="col-12 padding-top padding-bottom">
+            @Html.ActionLink("Movies", "Index", "MoviesAdministration", null, new { @class = "btn btn-primary btn-lg btn-full-width btn-tall" })
+        </div>
+        <div class="col-12 padding-top padding-bottom">
+            @Html.ActionLink("Customers", "Index", "CustomerAdministration", null, new { @class = "btn btn-primary btn-lg btn-full-width btn-tall" })
+        </div>
+        <div class="col-12 padding-top padding-bottom">
+            @Html.ActionLink("Administrators", "Index", "AdminUserAdministration", null, new { @class = "btn btn-primary btn-lg btn-full-width btn-tall" })
+        </div>
+        <div class="col-12 padding-top padding-bottom">
+            @Html.ActionLink("Database Log", "Index", "LogAdministration", null, new { @class = "btn btn-outline-primary btn-lg btn-full-width btn-tall" })
+        </div>
+    </div>
+}
+else
+{
+    <div class="row justify-content-md-center login-container padding-top">
+        <div class="col-lg-4 col-md-5">
+            <h2>Log in</h2>
+            <hr />
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-horizontal">
+                    @if (ViewBag.Message != null)
+                    {
+                        <p class="text-danger">@ViewBag.Message</p>
+                    }
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="padding-bottom">
+                        @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label padding-bottom-small" })
+                        @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control padding-bottom-small" } })
+                        @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger padding-bottom-small" })
+                    </div>
+
+                    <div class="padding-bottom">
+                            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label padding-bottom-small" })
+
+                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control padding-bottom-small", @type = "password" } })
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger padding-bottom-small" })
+                    </div>
+
+                    <div class="padding-top">
+                        <input type="submit" value="Log in" class="btn btn-primary btn-full-width" />
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}

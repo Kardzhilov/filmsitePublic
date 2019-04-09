@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#111416">
+    <title>@ViewBag.Title - NOVA online movie rental</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/custom-styles.css" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Raleway" rel="stylesheet">
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/site-scripts.js"></script>
+
+</head>
+
+<body>
+    <nav class="navbar navbar-dark navbar-expand-lg site-content-padding fixed-top dark-element">
+        <a class="navbar-brand" href="~/" title="Home page, NOVA">
+            <img id="site-logo" src="~/Content/Images/nova-logo.svg" alt="NOVA" />
+        </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse dark-element" id="navbarSupportedContent">
+            <form class="form-inline my-2 my-lg-0 ml-auto">
+                <input class="form-control mr-sm-2" id="search-field" type="search" placeholder="Search" aria-label="Search">
+            </form>
+
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/MyMovies/Index/">My Movies</a>
+                </li>
+                <li class="nav-item">
+                    @if (Session["LoggedIn"] != null && (bool)Session["LoggedIn"] == true)
+                    {
+                        <a class="nav-link" href="/MyPage/Index">@Session["Username"].ToString()</a>
+                    }
+                    else
+                    {
+                        <a class="nav-link" href="/Home/LogInModal">Login / Registrer</a>
+                    }
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container-fluid body-content site-content-padding">
+        <div>
+            <div id="search-result">
+                <h2 class="title-of-category">Shearch</h2>
+                <div class="category-scrollbar-hider">
+                    <div class="category-js-scroller-arrow category-js-scroller-left" role="button" data-direction-right="false"><div><</div></div>
+                    <div class="category-js-scroller-arrow category-js-scroller-right" role="button" data-direction-right="true"><div>></div></div>
+                    <div class="category-scroller-wrapper">
+                        <div class="site-content-padding">
+                            <div class="category-scroller-content"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="category-scroller-bumper"></div>
+                <div id="search-result-information-toggle" class="movie-information-toggle"></div>
+            </div>
+
+            <div id="search-result-template">
+                <a href="#" class="movie-poster-wrapper movie-info-link" data-movie-id="" data-movie-genre="search-result" aria-label="">
+                    <img src="" alt="">
+                </a>
+            </div>
+
+            <div id="main-content">
+                @RenderBody()
+            </div>
+        </div>
+        <footer id="site-footer" class="site-content-padding">
+            <p>This is a OsloMet school project. Please don't sue us.</p> <br>
+            <a href="@Url.Action("Index", "FAQ")">FAQ</a>
+        </footer>
+    </div>
+
+    <div id="ajax-movie-info-template">
+        <div class="info-toggle-screenshot-container">
+            <img class="info-toggle-screenshot" src="" alt="" />
+        </div>
+        <div class="info-toggle-text-container">
+            <h3 class="title-display info-toggle-tilte"></h3>
+            <h4 class="tilte-sub info-toggle-priority-metadata"></h4>
+            <p class="info-toggle-plot"></p>
+            <p class="info-toggle-metadata"></p>
+            <button class="large-btn info-toggle-rent-button" data-toggle="modal" data-target="#rent-confirm-modal">Rent for 7 days</button>
+        </div>
+    </div>
+
+    <div class="modal fade" id="rent-confirm-modal" tabindex="-1" role="dialog" aria-labelledby="rent-confirm-modal-label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title title" id="rent-confirm-modal-label">Rent <span id="rent-confirm-modal-movie-title"></span> for 7 days</h5>
+                </div>
+                <div class="modal-body">
+                    <button type="button" class="large-btn button-secondary" data-dismiss="modal">No</button>
+                    <button type="button" class="large-btn" id="rent-confirm-button">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>

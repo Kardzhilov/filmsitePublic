@@ -1,0 +1,26 @@
+﻿@model Model.ViewModels.CustomerViewModel
+
+@{
+    ViewBag.Title = "My Page";
+}
+
+<h2 class="title">My Page</h2>
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            Name:
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.LastName)
+        </dd>
+        <dt>
+            E-mail:
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+    </dl>
+</div>
+
+<a href="~/Home/Logout" class="btn large-btn mt-4">Log Out</a>

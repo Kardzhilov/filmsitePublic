@@ -1,0 +1,112 @@
+﻿@model filmsite.Models.WrapperUserObject
+
+@{
+    ViewBag.Title = "LogInModal";
+}
+
+<div class="log-in-body">
+    <div class="log-in-form-wrapper">
+        <h2 class="title">Log in</h2>
+        @using (Html.BeginForm("LogIn", "Home"))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                @{
+                    if (Model != null && Model.UserLoginObject != null && Model.UserLoginObject.ErrorState != null)
+                    {
+                        <h1 class="text-danger">@Model.UserLoginObject.ErrorState</h1>
+                    }
+                }
+                <div class="form-group">
+                    @Html.Label("E-mail", htmlAttributes: new { @class = "control-label" })
+                    <div>
+                        @Html.EditorFor(model => model.UserLoginObject.Email, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.UserLoginObject.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.UserLoginObject.Password, htmlAttributes: new { @class = "control-label" })
+                    <div>
+                        @Html.EditorFor(model => model.UserLoginObject.Password, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.UserLoginObject.Password, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="LogIn" class="btn btn-default large-btn" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <hr class="log-in-form-devider" />
+
+    <div class="log-in-form-wrapper">
+        <h2 class="title">Register</h2>
+        @using (Html.BeginForm("Register", "Home"))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                @{
+                    if (Model != null && Model.UserRegistrationObject != null && Model.UserRegistrationObject.ErrorState != null)
+                    {
+                        <h1 class="text-danger">@Model.UserRegistrationObject.ErrorState</h1>
+                    }
+                }
+                <div class="form-group">
+                    @Html.LabelFor(model => model.UserRegistrationObject.FirstName, htmlAttributes: new { @class = "control-label" })
+                    <div>
+                        @Html.EditorFor(model => model.UserRegistrationObject.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.UserRegistrationObject.FirstName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.UserRegistrationObject.LastName, htmlAttributes: new { @class = "control-label" })
+                    <div>
+                        @Html.EditorFor(model => model.UserRegistrationObject.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.UserRegistrationObject.LastName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.UserRegistrationObject.Email, htmlAttributes: new { @class = "control-label" })
+                    <div>
+                        @Html.EditorFor(model => model.UserRegistrationObject.Email, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.UserRegistrationObject.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.UserRegistrationObject.Password, htmlAttributes: new { @class = "control-label" })
+                    <div>
+                        @Html.EditorFor(model => model.UserRegistrationObject.Password, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.UserRegistrationObject.Password, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Repeat Password", htmlAttributes: new { @class = "control-label" })
+                    <div>
+                        @Html.EditorFor(model => model.UserRegistrationObject.RepeatPassword, new { htmlAttributes = new { @class = "form-control", @id = "register-password-repeat" } })
+                        @Html.ValidationMessageFor(model => model.UserRegistrationObject.RepeatPassword, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Register" class="btn btn-default large-btn" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

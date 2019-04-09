@@ -1,0 +1,165 @@
+﻿html, body {
+    height: 100%;
+}
+
+body {
+    background-color: #EEE;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 60px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+.container-fluid {
+    max-width: 1600px;
+}
+
+.flex-box {
+    display: flex;
+}
+
+.flex-end-sm {
+    justify-content: flex-end;
+}
+
+.site-navbar-bumper {
+    padding-top: 72px;
+}
+
+hr {
+    border-top-color: #CCC;
+}
+
+.padding-bottom {
+    padding-bottom: 15px;
+}
+
+.padding-bottom-small {
+    padding-bottom: 10px;
+}
+
+.padding-bottom-double {
+    padding-bottom: 30px;
+}
+
+.padding-top {
+    padding-top: 15px;
+}
+
+.padding-top-small {
+    padding-top: 10px;
+}
+
+.login-container {
+    height: 100%;
+}
+
+.btn-full-width, .btn-wide-on-sm {
+    width: 100%;
+}
+
+.btn-tall {
+    padding-top: 2em;
+    padding-bottom: 2em;
+}
+
+.left-align-self {
+    float: left;
+}
+
+.admin-list-row {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    transition: background-color 500ms;
+}
+
+.admin-list-row:nth-child(odd) {
+    background-color: #FFF;
+}
+
+.admin-list-row:hover {
+    background-color: #DDD;
+}
+
+.admin-list-row div {
+    display: flex;
+    align-items: center;
+}
+
+.admin-list-row .btn-cell {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.admin-list-row-header {
+    display: none;
+    color: #FFF;
+}
+
+.admin-list-row.admin-list-row-deleted {
+    background-color: darkred;
+    color: #FFF;
+}
+
+.admin-list-row.admin-list-row-deleted div:not(:first-child) {
+    opacity: 0;
+}
+
+.message-text-large {
+    font-size: 2em;
+    padding: .5em;
+}
+
+@media (min-width: 768px) {
+    .flex-end-sm {
+        justify-content: unset;
+    }
+
+    .login-container {
+        padding-top: 72px;
+    }
+
+    .btn-wide-on-sm {
+        width: auto;
+    }
+
+    .top-banner-button-wrapper {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .admin-list-row div {
+        justify-content: flex-start;
+    }
+
+    .admin-list-row .btn-cell {
+        justify-content: flex-end;
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+
+    .admin-list-row-header {
+        display: flex;
+    }
+}
+
+@media (min-width: 992px) {
+    .navbar {
+        padding-left: unset;
+        padding-right: unset;
+    }
+
+    .flex-end-md {
+        justify-content: unset;
+    }
+}

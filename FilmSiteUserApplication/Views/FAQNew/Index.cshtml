@@ -1,0 +1,30 @@
+﻿@model Model.FAQModelDAL
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 id="FAQTitle2">New User Question</h2>
+<p class="card-space"> </p>
+
+<div class="card submit-card">
+    <div class="card-body submit-body">
+        @using (Html.BeginForm("CreateQuestion", "FAQNew", FormMethod.Post))
+        {
+            @Html.TextBoxFor(model => model.Question, htmlAttributes: new { @id = "submit-area" })
+            @Html.ValidationMessageFor(model => model.Question, "", new { @class = "text-danger " })
+            <br id="submit-br">
+            <button href="#" class="btn btn-primary" id="submit-button" type="submit">Submit</button>
+        }
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+    var $button = $("#submit-button");
+    $button.prop("disabled", true);
+
+    $("#submit-area").keyup(function () {
+        $button.prop("disabled", (this.value === "") ? true : false);
+    });
+</script>
+

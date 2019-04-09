@@ -1,0 +1,21 @@
+﻿@model IEnumerable<filmsite.Models.MovieRental>
+
+@{
+    ViewBag.Title = "My Movies";
+}
+
+<h2 class="title">My Movies</h2>
+
+
+@foreach (var item in Model) {
+    <div class="rented-movie-wrapper">
+        <div class="rented-movie-poster">
+            <img src="@item.RentedMovie.Poster.Replace(".jpg", "._V1_SX468.jpg")" alt="@item.RentedMovie.Title" />
+        </div>
+        <div class="rented-movie-info">
+            <h2 class="title-display">@item.RentedMovie.Title</h2>
+            <p>@item.RentedMovie.Plot</p>
+            <a href="~/MyMovies/DownloadFile/@item.RentedMovie.Title" class="btn large-btn" role="button">Download</a>
+        </div>
+    </div>
+}

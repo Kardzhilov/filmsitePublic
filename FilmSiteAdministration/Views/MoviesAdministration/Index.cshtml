@@ -1,0 +1,76 @@
+﻿@model Model.ViewModels.MoviesListWrapperViewModel
+
+@{
+    ViewBag.Title = "Movie Administration";
+}
+
+<div class="row site-navbar-bumper">
+    <div class="col-md-8 page-header-wrapper">
+        <h1>@ViewBag.Title</h1>
+    </div>
+    <div class="col-md-4 top-banner-button-wrapper">
+        @Html.ActionLink("Add New Movie", "EditOrCreateMovie", "MoviesAdministration", new { movieId = 0 }, new { @class = "btn btn-primary btn-lg btn-wide-on-sm" })
+    </div>
+</div>
+
+<hr />
+
+@using (Html.BeginForm("Search", "MoviesAdministration"))
+{
+    <div class="row padding-bottom-double padding-top">
+        <div class="col-12 col-md-10">
+            @Html.EditorFor(model => model.SearchText, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+        <div class="col-12 col-md-2">
+            <input type="submit" value="Search" class="btn btn-primary btn-full-width" />
+        </div>
+    </div>
+}
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="row padding-bottom">
+        <div class="col-md-12 bg-success">
+            <div class="text-center text-light message-text-large">@TempData["SuccessMessage"]</div>
+        </div>
+    </div>
+}
+
+<div class="row bg-dark admin-list-row admin-list-row-header">
+    <div class="col-md-5 col-lg-6">
+        Title
+    </div>
+    <div class="col-md-1 col-lg-2 flex-end-sm">
+        Year
+    </div>
+</div>
+
+@foreach (var entry in Model.Movies)
+{
+    <div class="row admin-list-row">
+        <div class="col-8 col-md-5 col-lg-6">
+            <strong>@entry.Title</strong>
+        </div>
+        <div class="col-4 col-md-1 col-lg-2 flex-end-sm">
+            @entry.Year
+        </div>
+        <div class="col-6 col-md-3 col-lg-2 btn-cell">
+            @Html.ActionLink("Veiw or edit", "EditOrCreateMovie", "MoviesAdministration", new { movieId = @entry.Id }, new { @class = "btn btn-primary btn-full-width" })
+        </div>
+        <div class="col-6 col-md-3 col-lg-2 btn-cell">
+            <button class="btn btn-danger btn-full-width delete-movie" data-id="@entry.Id" data-action="DeleteMovie" data-controller="MoviesAdministration">Delete</button>
+        </div>
+    </div>
+}
+
+@if (Model.Movies.Count() == 0)
+{
+    <div class="row admin-list-row">
+        <div class="col-12">
+            <strong>
+                There are noe movies yet.
+                @Html.ActionLink("Click here to add a movie.", "EditOrCreateMovie", "MoviesAdministration", new { movieId = 0 })
+            </strong>
+        </div>
+    </div>
+}

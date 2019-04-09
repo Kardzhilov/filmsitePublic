@@ -1,0 +1,49 @@
+﻿@model  List<Model.LoggTypeDAL>
+@{
+    ViewBag.Title = "Database Log";
+}
+
+<div class="row site-navbar-bumper padding-bottom">
+    <div class="col-md-12 page-header-wrapper">
+        <h1>@ViewBag.Title</h1>
+    </div>
+</div>
+
+<div class="row bg-dark admin-list-row admin-list-row-header">
+    <div class="col-12 col-md-2 col-lg-2">
+        Timestamp
+    </div>
+    <div class="col-12 col-md-2 col-lg-1">
+        Event Type
+    </div>
+    <div class="col-12 col-md-2 col-lg-1">
+        Created By
+    </div>
+    <div class="col-12 col-md-4 col-lg-6">
+        Log Message
+    </div>
+    <div class="col-12 col-md-2 col-lg-2">
+        Log ID
+    </div>
+</div>
+
+@foreach (var entry in Model)
+{
+    <div class="row admin-list-row">
+        <div class="col-12 col-md-2 col-lg-2">
+            @entry.Created_date.ToString()
+        </div>
+        <div class="col-12 col-md-2 col-lg-1">
+            @entry.EventType
+        </div>
+        <div class="col-12 col-md-2 col-lg-1">
+            @entry.Created_By
+        </div>
+        <div class="col-12 col-md-4 col-lg-6">
+            <strong>@entry.LogMessage</strong>
+        </div>
+        <div class="col-12 col-md-2 col-lg-2">
+            @entry.LogID
+        </div>
+    </div>
+}
